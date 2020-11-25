@@ -3,13 +3,25 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 
 const User = require('../../models/User');
+const Post = require('../../models/Post');
+
 
 // @route GET api/users
 // @desc  Test route
-router.get('/', async (req, res) => {
+router.post('/getone', async (req, res) => {
   try {
-    const user = await (await User.findById(req.user.id)).isSelected('-password');
-    res.json(user);
+    console.log(req.body.email)
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error');
+  }
+})
+router.post('/delete', async (req, res) => {
+  try {
+    // const user = await (await User.findById(req.user.email));
+    console.log(req.headers['content-type']);
+    console.log(req.body.email)
+    // res.json(user);
   } catch (err) {
     console.log(err.message);
     res.status(500).send('Server Error');

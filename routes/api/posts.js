@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const { check, validationResult } = require('express-validator');
 
-// @route GET api/posts
-// @desc  Test route
-router.get('/', (req, res) => res.send('posts route'));
+const Post = require('../../models/Post');
+const User = require('../../models/User');
+
+// @route POST api/posts
+// @desc  post posts
 
 module.exports = router;
