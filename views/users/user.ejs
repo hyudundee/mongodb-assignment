@@ -23,7 +23,7 @@
         </form>
       </div>
       <div class="col-4">
-        <h4>here Get / Delete a specific user</h4>
+        <h4>Get / Delete a specific user</h4>
         <form action="/api/users/getone", method="POST">
           <%- include('_form_get_specific_user') %>
         </form>
@@ -56,6 +56,26 @@
       </div>
     </div>
     <div class="row">
+      <div class="col-4">
+        <h4>Join User Friends</h4>
+        <form action="/api/users/join", method="POST">
+          <%- include('_form_join_user_friends') %>
+        </form>
+      </div>
+      <div class="col-4">
+        <h4>UnJoin User Friends</h4>
+        <form action="/api/users/unjoin", method="POST">
+          <%- include('_form_unjoin_user_friends') %>
+        </form>
+      </div>
+      <div class="col-4">
+        <h4>Get User's Friends' Posts</h4>
+        <form action="/api/posts/getbyfriends", method="POST">
+          <%- include('_form_unjoin_user_friends') %>
+        </form>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-6">
         <h2 class="mt-4">Users Data</h2>
         <% users.forEach(user => { %>
@@ -65,10 +85,10 @@
               <h5 class = "card-text mb-2">user id: <%= user.id %><h5>
               <div class = "card-text mb-2">email: <%= user.email %></div>
               <div class = "card-text mb-2">password: <%= user.password %></div>
-              <div class = "card-text mb-2">friends: <%= user.firends %></div>
+              <div class = "card-text mb-2">friends: <% user.firends %></div>
             </div>
           </div>
-        <% })%></h2>
+        <% })%>
       </div>
       <div class="col-6">
         <h2 class="mt-4">Tweets Data</h2>
@@ -80,7 +100,7 @@
                 <h5 class = "card-text mb-2">user id: <%= post.user %><h5>
             </div>
           </div>
-        <% })%></h2>
+        <% })%>
       </div>
     </div>
       
