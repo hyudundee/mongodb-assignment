@@ -12,6 +12,39 @@ https://github.com/hyudundee/user-db-sqlite3-ejs-express/blob/master/class-relat
 
 ![image](https://github.com/hyudundee/user-db-sqlite3-ejs-express/blob/master/class-related/ERD.png)
 
+```
+const UserSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  friends: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users'
+      },
+      connectDate: {
+        type: Date,
+        default: Date.now
+      }
+    }
+  ],
+  createDate: {
+    type: Date,
+    default: Date.now
+  }
+});
+```
+
 ### Definition of relational schema with proof that it is in BCNF.
 
 ![image](https://github.com/hyudundee/user-db-sqlite3-ejs-express/blob/master/class-related/schema-design-bcnf.png)
