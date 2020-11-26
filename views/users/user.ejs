@@ -12,13 +12,13 @@
     <div class="row">
       <div class="col-4">
         <h4>Create a new user</h4>
-        <form action="/", method="POST">
+        <form action="/api/users/create", method="POST">
           <%- include('_form_new_user') %>
         </form>
       </div>
       <div class="col-4">
         <h4>Update a new user</h4>
-        <form action="/update", method="POST">
+        <form action="/api/users/update", method="POST">
           <%- include('_form_update_user') %>
         </form>
       </div>
@@ -35,23 +35,23 @@
     <div class="row">
       <div class="col-4">
         <h4>Create a new tweet</h4>
-        <form action="/", method="POST">
-          <%- include('_form_new_user') %>
+        <form action="/api/posts/create", method="POST">
+          <%- include('../posts/_form_new_tweet') %>
         </form>
       </div>
       <div class="col-4">
-        <h4>Update a new tweet</h4>
-        <form action="/update", method="POST">
-          <%- include('_form_update_user') %>
+        <h4>Update a tweet</h4>
+        <form action="/api/posts/update", method="POST">
+          <%- include('../posts/_form_update_tweet') %>
         </form>
       </div>
       <div class="col-4">
-        <h4>Get / Delete a specific user's friends tweet</h4>
-        <form action="/specific", method="GET">
-          <%- include('_form_get_specific_user') %>
+        <h4>Get / Delete a specific tweet</h4>
+        <form action="/api/posts/getone", method="POST">
+          <%- include('../posts/_form_get_specific_tweet') %>
         </form>
-        <form action="/delete", method="POST">
-          <%- include('_form_delete_user') %>
+        <form action="/api/posts/delete", method="POST">
+          <%- include('../posts/_form_delete_tweet') %>
         </form>
       </div>
     </div>
@@ -70,8 +70,8 @@
       </div>
       <div class="col-4">
         <h4>Get User's Friends' Posts</h4>
-        <form action="/api/posts/getbyfriends", method="POST">
-          <%- include('_form_unjoin_user_friends') %>
+        <form action="/api/posts/getfriends", method="POST">
+          <%- include('../posts/_form_get_friends_tweet') %>
         </form>
       </div>
     </div>
@@ -95,7 +95,8 @@
         <% posts.forEach(post => { %>
           <div class="card mt-4">
             <div class="card-body">
-              <h4 class="card-title">user name: <%= post.name %></h4>
+              <h4 class="card-title">tweet name: <%= post.name %></h4>
+              <h5 class="card-title">tweet id: <%= post.id %></h5>
               <h5 class = "card-text mb-2">text: <%= post.text %><h5>
                 <h5 class = "card-text mb-2">user id: <%= post.user %><h5>
             </div>

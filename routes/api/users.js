@@ -23,6 +23,8 @@ router.post('/getone', async (req, res) => {
   }
 });
 
+// @route Join two users friends
+// @desc  
 router.post('/join', async (req, res) => {
   try {
     const {id1, id2} = req.body;
@@ -60,6 +62,9 @@ router.post('/join', async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+// @route UnJoin two users friends
+// @desc  
 router.post('/unjoin', async (req, res) => {try {
   const {id1, id2} = req.body;
   if (id1 === id2) {
@@ -104,42 +109,11 @@ router.post('/unjoin', async (req, res) => {try {
   console.log(err)
   res.status(500).send('Server Error');
 }
-})
-
-router.post('/delete', async (req, res) => {
-  try {
-    // const user = await (await User.findById(req.user.email));
-    console.log(req.headers['content-type']);
-    console.log(req.body.email)
-    // res.json(user);
-  } catch (err) {
-    console.log(err.message);
-    res.status(500).send('Server Error');
-  }
 });
 
-// @route POST api/users
+// @route POST api/users/post
 // @desc  Register user
-router.post('/', [
-  check(
-    'name',
-    'Name is required')
-    .not()
-    .isEmpty(),
-  check(
-    'email',
-    'Please enter a valid email address')
-    .isEmail(),
-  check(
-    'password',
-    'Please enter a password with 6 or more characters')
-    .isLength({ min: 6 })
-],
-async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array });
-  }
+router.post('/create', async (req, res) => {
 
   const { name, email, password } = req.body;
   try {
@@ -150,14 +124,77 @@ async (req, res) => {
     user = new User({
       name,
       email,
-      password  
+      password
     });
     await user.save();
-    res.send('User registered') 
+    res.send('User created') 
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
   }
 });
+
+// @route POST api/users/update
+// @desc  update a user
+router.post('/update', async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+    let user = await User.findOne({ email: email});
+    if (!user) {
+      return res.status(400).json({ errors: [{ msg: 'User does not exists'}]});
+    }
+    user.email = email;
+    user.name = name;
+    user.password = password
+    await user.save();
+    res.send('User Updated') 
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
+// @route POST api/users/delete
+// @desc  delete a user
+router.post('/delete', async (req, res) => {
+  try {
+    const { id } = req.body;
+    const user = await User.findById(id);
+    if (user) {
+      await user.remove();
+      res.json({ msg: "User successfully deleted",
+                user: user
+                })
+    } else {
+      res.json({ msg: "No user under this id"})
+    }
+  } catch (err) {
+    if (err.kind === 'ObjectId') {
+      return res.status(400).json({ msg: 'User id is invalid' });
+    }
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+})
+
+// @route POST api/users/delete
+// @desc  get a specific user by id
+router.post('/getone', async (req, res) => {
+  try {
+    const { id } = req.body;
+    const user = await User.findById(id);
+    if (user) {
+      res.json(user);
+    } else {
+      res.json({ msg: "No user under this id"})
+    }
+  } catch (err) {
+    if (err.kind === 'ObjectId') {
+      return res.status(400).json({ msg: 'User id is invalid' });
+    }
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+})
 
 module.exports = router;

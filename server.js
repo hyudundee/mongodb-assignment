@@ -27,15 +27,14 @@ app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/posts', require('./routes/api/posts'));
 
-
 // main page
 app.get('/', async (req, res) => {
   try {
     const user = await User.find().sort({ date: -1 });
     const post = await Post.find().sort({ date: -1 });
-    for (let i = 0; i < user.length; i++) {
-      console.log(user[i].friends)
-    }
+    // for (let i = 0; i < user.length; i++) {
+    //   console.log(user[i].friends)
+    // }
     res.render("users/user", { users: user, posts: post });
     // res.json(post);
   } catch (err) {
@@ -43,25 +42,3 @@ app.get('/', async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
-
-
-
-// Users CRUD operation
-
-app.get('/user/one', (req, res) => {
-  console.log(req.body)
-  res.send('hi')
-})
-
-app.post('/user/geta', (req, res) => {
-  console.log(req.body.id)
-  res.send('hi')
-})
-// app.post('/delete', (req, res) => {
-//   console.log(req.body)
-//   res.send('hi')
-// })
-
-app.post('/update', (req, res) => {
-  console.log(req.body)
-})
