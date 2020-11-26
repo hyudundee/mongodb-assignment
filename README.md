@@ -12,6 +12,10 @@ https://github.com/hyudundee/user-db-sqlite3-ejs-express/blob/master/class-relat
 
 ![image](https://github.com/hyudundee/user-db-sqlite3-ejs-express/blob/master/class-related/ERD.png)
 
+### Definition of file data schema with proof that it is in BCNF.
+
+Define User's Schema
+
 ```
 const UserSchema = new mongoose.Schema({
   name: {
@@ -45,11 +49,27 @@ const UserSchema = new mongoose.Schema({
 });
 ```
 
-new line
+Design of Posts' Schema
 
-### Definition of relational schema with proof that it is in BCNF.
-
-![image](https://github.com/hyudundee/user-db-sqlite3-ejs-express/blob/master/class-related/schema-design-bcnf.png)
+```
+const PostSchema = new Schema({
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'users'
+  },
+  text: {
+    type: String,
+    required: true
+  },
+  name: {
+    type: String
+  },
+  createDate: {
+    type: Date,
+    default: Date.now
+  }
+});
+```
 
 ### SQL file (text file) with the table definitions and creation SQL statements that can be executed with SQLite3
 
