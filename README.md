@@ -45,6 +45,8 @@ const UserSchema = new mongoose.Schema({
 });
 ```
 
+new line
+
 ### Definition of relational schema with proof that it is in BCNF.
 
 ![image](https://github.com/hyudundee/user-db-sqlite3-ejs-express/blob/master/class-related/schema-design-bcnf.png)
