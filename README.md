@@ -85,7 +85,7 @@ https://github.com/hyudundee/mongodb-assignment
 
 ### Overview of app
 
-![image](https://github.com/hyudundee/user-db-sqlite3-ejs-express/blob/master/class-related/readme-pics/overview.png)
+![image](https://github.com/hyudundee/mongodb-assignment/blob/master/class-related/Overview%20of%20app.png)
 
 ### First time install
 
