@@ -2,7 +2,7 @@
 
 ### requirement as pdf
 
-https://github.com/hyudundee/user-db-sqlite3-ejs-express/blob/master/class-related/requirement.pdf
+https://github.com/hyudundee/mongodb-assignment/blob/master/class-related/requirement.pdf
 
 ### UML
 
@@ -10,78 +10,80 @@ https://github.com/hyudundee/user-db-sqlite3-ejs-express/blob/master/class-relat
 
 ### ERD
 
-![image](https://github.com/hyudundee/user-db-sqlite3-ejs-express/blob/master/class-related/ERD.png)
+![image](https://github.com/hyudundee/mongodb-assignment/blob/master/class-related/DataSchemaDesign.png)
 
 ### Definition of file data schema with proof that it is in BCNF.
 
 Define User's Schema
 
-```
+```javascript
 const UserSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  email: {
-    type: String,
-    required: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  friends: [
-    {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: 'users'
-      },
-      connectDate: {
-        type: Date,
-        default: Date.now
-      }
-    }
-  ],
-  createDate: {
-    type: Date,
-    default: Date.now
-  }
+	name: {
+		type: String,
+		required: true,
+	},
+	email: {
+		type: String,
+		required: true,
+	},
+	password: {
+		type: String,
+		required: true,
+	},
+	friends: [
+		{
+			user: {
+				type: Schema.Types.ObjectId,
+				ref: "users",
+			},
+			connectDate: {
+				type: Date,
+				default: Date.now,
+			},
+		},
+	],
+	createDate: {
+		type: Date,
+		default: Date.now,
+	},
 });
 ```
 
 Design of Posts' Schema
 
-```
+```javascript
 const PostSchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'users'
-  },
-  text: {
-    type: String,
-    required: true
-  },
-  name: {
-    type: String
-  },
-  createDate: {
-    type: Date,
-    default: Date.now
-  }
+	user: {
+		type: Schema.Types.ObjectId,
+		ref: "users",
+	},
+	text: {
+		type: String,
+		required: true,
+	},
+	name: {
+		type: String,
+	},
+	createDate: {
+		type: Date,
+		default: Date.now,
+	},
 });
 ```
 
-### SQL file (text file) with the table definitions and creation SQL statements that can be executed with SQLite3
+### Mongo Atlas Post
 
-https://github.com/hyudundee/user-db-sqlite3-ejs-express/blob/master/db/news-feed-db/newsFeed2.db.sql
+![image](https://github.com/hyudundee/mongodb-assignment/blob/master/class-related/MongoAtlas-Posts.png)
+
+### Mongo Atlas User
+
+![image](https://github.com/hyudundee/mongodb-assignment/blob/master/class-related/MongoAtlas-Users.png)
 
 ### The code of your basic application
 
-https://github.com/hyudundee/user-db-sqlite3-ejs-express
+https://github.com/hyudundee/mongodb-assignment
 
 ### Overview of app
-
-Sorry but because I am not familiar with web structure with connecting frontend and relational database, I only build a database of users, but have provided test code within the newsFeedDB.js.
 
 ![image](https://github.com/hyudundee/user-db-sqlite3-ejs-express/blob/master/class-related/readme-pics/overview.png)
 
@@ -93,6 +95,6 @@ run
 
 - _npm run server_
 
-access the app via 'http://localhost:2000/users'
+access the app via 'http://localhost:5000/users'
 
 - enjoy!
