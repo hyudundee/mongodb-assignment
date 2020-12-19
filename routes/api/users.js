@@ -43,6 +43,8 @@ router.post('/join', async (req, res) => {
         .status(400)
         .json({ errors: [{ msg: 'Users were already friends' }] });
     }
+    const insert1 = {user: id1};
+    const insert2 = {user: id2};
     user1.friends.unshift(insert2);
     user2.friends.unshift(insert1);
     await user1.save();
@@ -74,7 +76,7 @@ router.post('/unjoin', async (req, res) => {try {
   }
   const user1 = await User.findById(id1);
   const user2 = await User.findById(id2);
-  if (user1.friends.length === 0 || user1.friends.length === 0) {
+  if (user1.friends.length === 0 || user2.friends.length === 0) {
     return res
       .status(400)
       .json({ msg: "Cannot remove from empty friends list"});
