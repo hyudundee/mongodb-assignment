@@ -33,8 +33,10 @@ router.post('/join', async (req, res) => {
         .status(400)
         .json({ msg: "Cannot join a user with him/herself as firends"})
     }
+    
     const user1 = await User.findById(id1);
     const user2 = await User.findById(id2);
+
     const u1_u2_alreay_connected = user1.friends
       .map((f) => f.user)
       .indexOf(id2);
